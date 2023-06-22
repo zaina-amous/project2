@@ -1,20 +1,20 @@
 <resources>
 
     <!-- Main activity -->
+
     <string name="app_name">Planet Quiz</string>
-    <string name="question0">What planet is known for its rings? </string>
-    <string name="question1">What planet is the second largest in our solar system?</string>
-    <string name="question2">What planet is known for its Great Red Spot? </string>
-    <string name="question3">What planet is tilted on its side?</string>
-    <string name="question4">What planet is known as the Morning Star or Evening Star?</string>
-    <string name="question5">What planet is often referred to as the Red Planet?  </string>
-    <string name="question6">What planet is closest to the sun?</string>
-    <string name="question7">What planet is home to humans? </string>
-    <string name="question8">What planet is farthest from the sun? </string>
 
-
-
-
+    <string-array name="question_array">
+        <item>What planet is known for its rings?</item>
+        <item>What planet is the second largest in our solar system?</item>
+        <item>What planet is known for its Great Red Spot?</item>
+        <item>What planet is tilted on its side?</item>
+        <item>What planet is known as the Morning Star or Evening Star?</item>
+        <item>What planet is often referred to as the Red Planet?</item>
+        <item>What planet is closest to the sun?</item>
+        <item>What planet is home to humans?</item>
+        <item>What planet is farthest from the sun?</item>
+    </string-array>
 
 
     <!-- Planets -->
@@ -29,7 +29,6 @@
         <item>Neptune</item>
         <item>Pluto</item>
     </string-array>
-
 
 
 </resources>

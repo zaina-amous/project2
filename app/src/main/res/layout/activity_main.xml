@@ -1,102 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
+    android:padding="16dp">
 
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/questionTextView"
+    <LinearLayout
+        android:id="@+id/Recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:padding="16dp"
-        android:layout_margin="50dp"
+        android:orientation="vertical">
 
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="20dp"
-        >
-
-        <Button
-            android:id="@+id/option1Button"
-            android:layout_width="133dp"
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:padding="16dp"
-            android:textSize="18sp"
-          
-            >
-        </Button>
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/option2Button"
-            android:layout_width="133dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:padding="16dp"
-            android:textSize="18sp"></Button>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="20dp"
-        >
-
-        <Button
-            android:id="@+id/option3Button"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:padding="16dp"
-            android:textSize="18sp"
-            >
-        </Button>
-
-        <Button
-            android:id="@+id/option4Button"
-            android:layout_width="143dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:padding="16dp"
-            android:textSize="18sp"
-
-            ></Button>
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/scoreTextView"
-
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="30dp"
-        android:padding="16dp"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        android:textStyle="bold" />
-    <Button
-        android:id="@+id/answer"
-
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="30dp"
-        android:padding="16dp"
-        android:visibility="invisible"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-</LinearLayout>
+</ScrollView>

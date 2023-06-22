@@ -1,101 +1,126 @@
 package bzu.edu.project;
 
+import android.content.Context;
+import android.content.res.Resources;
 
-    import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-    public class Quiz {
+public class Quiz {
+    private static  String[] PLANETS;
+    private static  String[] QUESTIONS;
 
-       //name of all the planets in our solar system
-        private static final String[] PLANETS = {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
-       //selects random planets for the button texts
-        private static final Random random = new Random();
-//list of questioons to ask
-        private List<Question> questions;
-    private String questionText , correctAnswer;
+    private List<Question> questions;
 
-      //create an object of type quiz witha specific num of questions
-        public Quiz(int numQuestions) {
-            questions = new ArrayList<>();
+    public Quiz(Context context, int numQuestions) {
+        Resources resources = context.getResources();
+        PLANETS = resources.getStringArray(R.array.planets_array);
+        QUESTIONS = resources.getStringArray(R.array.question_array);
 
-            //displaying the question depending on the correct planet
-            for (int i = 0; i < numQuestions; i++) {
-                String planet = PLANETS[random.nextInt(PLANETS.length)];
-                questionText = "What planet is known for its rings?";
-                correctAnswer = "Saturn";
-                if (planet.equals("Saturn")) {
-                    correctAnswer = "Saturn";
-                    questionText = "What planet is the second largest in our solar system?";
-                } else if (planet.equals("Jupiter")) {
-                    correctAnswer = "Jupiter";
-                    questionText = "What planet is known for its Great Red Spot?";
-                } else if (planet.equals("Neptune")) {
-                    correctAnswer = "Neptune";
-                    questionText = "What planet is farthest from the sun?";
-                } else if (planet.equals("Uranus")) {
-                    correctAnswer = "Uranus";
-                    questionText = "What planet is tilted on its side?";
-                } else if (planet.equals("Venus")) {
-                    correctAnswer = "Venus";
-                    questionText = "What planet is known as the Morning Star or Evening Star?";
-                } else if (planet.equals("Mars")) {
-                    correctAnswer = "Mars";
-                    questionText = "What planet is often referred to as the Red Planet?";
-                } else if (planet.equals("Mercury")) {
-                    correctAnswer = "Mercury";
-                    questionText = "What planet is closest to the sun?";
-                } else if (planet.equals("Earth")) {
-                    correctAnswer = "Earth";
-                    questionText = "What planet is home to humans?";
-                }
-                //this is only to generate a random answer options
-                List<String> answers = new ArrayList<>();
-                answers.add(correctAnswer);
-                //only 3 options since the 4th one is going to be our correct answer
-                while (answers.size() < 4) {
-                    String randomPlanet = PLANETS[random.nextInt(PLANETS.length)];
-                    if (!answers.contains(randomPlanet)) {
-                        answers.add(randomPlanet);
-                    }
-                }
-                Collections.shuffle(answers);
-                Question question = new Question(questionText, answers, correctAnswer);
-                questions.add(question);
-            }
-        }
+        questions = new ArrayList<>();
 
-//to create question
-        public List<Question> getQuestions() {
-            return questions;
-        }
+        Random random = new Random();
+        for (int i = 0; i < numQuestions; i++) {
+            String planet = PLANETS[random.nextInt(PLANETS.length)];
+            String questionText = getQuestionText(planet);
+            String correctAnswer = getCorrectAnswer(planet);
+            List<String> answers = generateRandomAnswers(correctAnswer);
 
-        //inner class
-        public static class Question {
-            private final String questionText;
-            private final List<String> answers;
-            private final String correctAnswer;
-
-            public Question(String questionText, List<String> answers, String correctAnswer) {
-                this.questionText = questionText;
-                this.answers = answers;
-                this.correctAnswer = correctAnswer;
-            }
-
-            public String getQuestionText() {
-                return questionText;
-            }
-
-            public List<String> getAnswers() {
-                return answers;
-            }
-
-            public String getCorrectAnswer() {
-                return correctAnswer;
-            }
+            Question question = new Question(questionText, answers, correctAnswer);
+            questions.add(question);
         }
     }
 
+    private String getQuestionText(String planet) {
+        if (planet.equals("Saturn")) {
+            return QUESTIONS[1];
+        } else if (planet.equals("Jupiter")) {
+            return QUESTIONS[2];
+        } else if (planet.equals("Neptune")) {
+            return QUESTIONS[8];
+        } else if (planet.equals("Uranus")) {
+            return QUESTIONS[3];
+        } else if (planet.equals("Venus")) {
+            return QUESTIONS[4];
+        } else if (planet.equals("Mars")) {
+            return QUESTIONS[5];
+        } else if (planet.equals("Mercury")) {
+            return QUESTIONS[6];
+        } else if (planet.equals("Earth")) {
+            return QUESTIONS[7];
+        } else {
+            // Default question text
+            return QUESTIONS[0];
+        }
+    }
 
+    private String getCorrectAnswer(String planet) {
+        switch (planet) {
+            case "Saturn":
+                return PLANETS[5];
+            case "Jupiter":
+                return PLANETS[4];
+            case "Neptune":
+                return PLANETS[7];
+            case "Uranus":
+                return PLANETS[6];
+            case "Venus":
+                return PLANETS[1];
+            case "Mars":
+                return PLANETS[3];
+            case "Mercury":
+                return PLANETS[0];
+            case "Earth":
+                return PLANETS[2];
+            default:
+                // Default correct answer
+                return PLANETS[5];
+        }
+    }
+
+    private List<String> generateRandomAnswers(String correctAnswer) {
+        List<String> answers = new ArrayList<>();
+        answers.add(correctAnswer);
+
+        Random random = new Random();
+        while (answers.size() < 4) {
+            String randomPlanet = PLANETS[random.nextInt(PLANETS.length)];
+            if (!answers.contains(randomPlanet)) {
+                answers.add(randomPlanet);
+            }
+        }
+
+        Collections.shuffle(answers);
+        return answers;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public static class Question {
+        private final String questionText;
+        private final List<String> answers;
+        private final String correctAnswer;
+
+        public Question(String questionText, List<String> answers, String correctAnswer) {
+            this.questionText = questionText;
+            this.answers = answers;
+            this.correctAnswer = correctAnswer;
+        }
+
+        public String getQuestionText() {
+            return questionText;
+        }
+
+        public List<String> getAnswers() {
+            return answers;
+        }
+
+        public String getCorrectAnswer() {
+            return correctAnswer;
+        }
+    }
+}
